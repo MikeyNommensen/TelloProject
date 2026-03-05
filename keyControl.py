@@ -31,7 +31,7 @@ def getKeyboardInput():
     return [lr, fb, ud, yv]
 
 
-drone.takeoff()
+#drone.takeoff()
 
 
 while True:
