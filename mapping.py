@@ -6,8 +6,8 @@ import cv2
 import math
 
 # PARAMETERS 
-forwardSpeed = 117/10   # Forward Speed (cm/s)           (15cm/s)
-angularSpeed = 360/10   # Angular speed (Degrees/s)      (50d/s)
+forwardSpeed = 117/10   # Forward Speed (cm/s)    117/10       (15cm/s)
+angularSpeed = 360/10   # Angular speed (Degrees/s)   360/10   (50d/s)
 interval = 0.25
 
 distanceInterval = forwardSpeed*interval
@@ -17,11 +17,14 @@ x, y = 500, 500
 a = 0  #angle
 yaw = 0
 
+isFlying = False
+
 
 
 kp.init()
 drone = tello.Tello()
 drone.connect()
+sleep(3)
 print(drone.get_battery())
 points = [(0, 0), (0, 0)]
 
@@ -65,10 +68,14 @@ def getKeyboardInput():
         yv = angularSpeed
         yaw += angularInterval
 
-    if kp.getKey("q"): 
-        drone.land()
-    if kp.getKey("e"):
-        drone.takeoff() # tombol e dikeyboard adalah langkah awal setelah drone terkonek
+    global isFlying
+
+    if kp.getKey("e") and not isFlying: 
+        drone.takeoff()
+        isFlying = True
+    if kp.getKey("q") and isFlying:
+        drone.land() # tombol e dikeyboard adalah langkah awal setelah drone terkonek
+        isFlying = False
 
     sleep(interval)
     a += yaw
@@ -96,4 +103,5 @@ while True:
         points.append((values[4], values[5]))
     drawPoints(img, points)
     cv2.imshow("Output", img)
+
     cv2.waitKey(1)
