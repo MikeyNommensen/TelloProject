@@ -84,8 +84,9 @@ def trackFace(center, area, w, pid, pError):
 
 while True:
 
-    frame = frame_read.frame
+    frame = frame_read.frame  # baris ini disebut sebagai shared memory buffer, digunakan agar openCV membaca pointer frame yang lama
 
+    # Dipakai agar stream tidak crash
     if frame is None:
         continue
 
