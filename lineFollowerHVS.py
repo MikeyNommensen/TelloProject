@@ -7,7 +7,8 @@ import numpy as np
 
 cap = cv2.VideoCapture(0)
 #hsvVals = [0, 0, 117, 179, 22, 219] Nilai HSV dari Website cvzone
-hsvVals = [0, 0, 100, 179, 255, 255]
+#hsvVals = [0, 0, 100, 179, 255, 255] Nilai HSV dari percobaan ku yang baru
+hsvVals = [0, 0, 71, 179, 32, 208]
 
 
 # Find a PATH
